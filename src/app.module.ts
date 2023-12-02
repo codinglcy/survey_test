@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { SurveysModule } from './surveys/surveys.module';
+import { QuestionsModule } from './questions/questions.module';
+import { ChoicesModule } from './choices/choices.module';
+import { AnswersModule } from './answers/answers.module';
 
 @Module({
   imports: [
@@ -27,8 +30,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       autoSchemaFile: 'schema.gpl',
       driver: ApolloDriver,
     }),
+    SurveysModule,
+    QuestionsModule,
+    ChoicesModule,
+    AnswersModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}
