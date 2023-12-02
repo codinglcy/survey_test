@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CreateSurveyDto {
+  id: String!
+  title: String!
+  finish: String!
+}
+
+type Query {
+  survey: [CreateSurveyDto!]!
+}
+
+type Mutation {
+  createSurvey(data: inputSurvey!): CreateSurveyDto!
+}
+
+input inputSurvey {
+  title: String!
+  finish: String!
+}
