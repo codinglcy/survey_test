@@ -4,7 +4,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { SurveyModule } from './survey/survey.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
@@ -28,7 +27,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       autoSchemaFile: 'schema.gpl',
       driver: ApolloDriver,
     }),
-    SurveyModule,
   ],
   controllers: [AppController],
   providers: [AppService],
