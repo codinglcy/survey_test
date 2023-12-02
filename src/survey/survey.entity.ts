@@ -7,6 +7,6 @@ export class SurveyEntity {
   @Column('varchar', { length: 50 })
   title!: string;
 
-  @Column('varchar', { length: 50 })
-  finish: string;
+  @Column('varchar', { length: 50, nullable: true })
+  finish?: string;
 }

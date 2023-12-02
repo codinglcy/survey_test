@@ -5,7 +5,7 @@
 type CreateSurveyDto {
   id: String!
   title: String!
-  finish: String!
+  finish: String
 }
 
 type Query {
@@ -18,5 +18,5 @@ type Mutation {
 
 input inputSurvey {
   title: String!
-  finish: String!
+  finish: String
 }

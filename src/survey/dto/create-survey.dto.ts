@@ -4,5 +4,5 @@ import { ObjectType, Field } from '@nestjs/graphql';
 export class CreateSurveyDto {
   @Field() readonly id?: string;
   @Field() readonly title!: string;
-  @Field() readonly finish: string;
+  @Field({ nullable: true }) readonly finish?: string;
 }
