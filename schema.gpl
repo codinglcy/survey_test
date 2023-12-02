@@ -1,0 +1,38 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SurveyDto {
+  id: String!
+  title: String!
+  notification: String
+  finish: String
+}
+
+type deleteResult {
+  result: String!
+}
+
+type Query {
+  getAllSurvey: [SurveyDto!]!
+  getSurveyById(id: String!): SurveyDto!
+}
+
+type Mutation {
+  createSurvey(data: inputSurvey!): SurveyDto!
+  updateSurvey(data: updateSurvey!): SurveyDto!
+  deleteSurvey(id: String!): deleteResult!
+}
+
+input inputSurvey {
+  title: String!
+  notification: String
+  finish: String
+}
+
+input updateSurvey {
+  id: String!
+  title: String!
+  notification: String
+  finish: String
+}

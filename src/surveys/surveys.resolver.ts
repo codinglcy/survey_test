@@ -1,4 +1,39 @@
-import { Resolver } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { SurveyEntity } from './surveys.entity';
+import { SurveysService } from './surveys.service';
+import {
+  SurveyDto,
+  deleteResult,
+  inputSurvey,
+  updateSurvey,
+} from './surveys.types';
 
-@Resolver()
-export class SurveysResolver {}
+@Resolver(SurveyEntity)
+export class SurveysResolver {
+  constructor(private readonly surveyService: SurveysService) {}
+
+  @Query(() => [SurveyDto])
+  async getAllSurvey() {
+    return this.surveyService.getSurveys();
+  }
+
+  @Query(() => SurveyDto)
+  async getSurveyById(@Args('id') id: string) {
+    return this.surveyService.getSurveyById(id);
+  }
+
+  @Mutation(() => SurveyDto)
+  async createSurvey(@Args('data') data: inputSurvey) {
+    return this.surveyService.createSurvey(data);
+  }
+
+  @Mutation(() => SurveyDto)
+  async updateSurvey(@Args('data') data: updateSurvey) {
+    return this.surveyService.updateSurveyById(data);
+  }
+
+  @Mutation(() => deleteResult)
+  async deleteSurvey(@Args('id') id: string) {
+    return this.surveyService.deleteSurveyById(id);
+  }
+}
