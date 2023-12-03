@@ -1,0 +1,128 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SurveyDto {
+  id: String!
+  title: String!
+  notification: String
+  finish: String
+}
+
+type deleteSurveyResult {
+  result: String!
+}
+
+type QuestionDto {
+  id: String!
+  qnum: Float
+  detail: String!
+  multi: Boolean!
+  surveyId: String!
+}
+
+type deleteQuestionResult {
+  result: String!
+}
+
+type ChoiceDto {
+  id: String!
+  cnum: Float!
+  content: String!
+  questionId: String!
+}
+
+type deleteChoiceResult {
+  result: String!
+}
+
+type AnswerDto {
+  id: String!
+  surveyId: String!
+  questionId: String!
+  choiceId: String!
+}
+
+type deleteAnswerResult {
+  result: String!
+}
+
+type Query {
+  getAllSurvey: [SurveyDto!]!
+  getSurveyById(id: String!): SurveyDto!
+  getAllQuestion: [QuestionDto!]!
+  getQuestionById(id: String!): QuestionDto!
+  getAllChoice: [ChoiceDto!]!
+  getChoiceById(id: String!): ChoiceDto!
+  getAllAnswer: [AnswerDto!]!
+  getAnswerById(id: String!): AnswerDto!
+}
+
+type Mutation {
+  createSurvey(data: inputSurvey!): SurveyDto!
+  updateSurvey(data: updateSurvey!): SurveyDto!
+  deleteSurvey(id: String!): deleteSurveyResult!
+  createQuestion(data: inputQuestion!): QuestionDto!
+  updateQuestion(data: updateQuestion!): QuestionDto!
+  deleteQuestion(id: String!): deleteQuestionResult!
+  createChoice(data: inputChoice!): ChoiceDto!
+  updateChoice(data: updateChoice!): ChoiceDto!
+  deleteChoice(id: String!): deleteChoiceResult!
+  createAnswer(data: inputAnswer!): AnswerDto!
+  updateAnswer(data: updateAnswer!): AnswerDto!
+  deleteAnswer(id: String!): deleteAnswerResult!
+}
+
+input inputSurvey {
+  title: String!
+  notification: String
+  finish: String
+}
+
+input updateSurvey {
+  id: String!
+  title: String!
+  notification: String
+  finish: String
+}
+
+input inputQuestion {
+  qnum: Float
+  detail: String!
+  multi: Boolean
+  surveyId: String!
+}
+
+input updateQuestion {
+  id: String!
+  qnum: Float
+  detail: String!
+  multi: Boolean
+  surveyId: String!
+}
+
+input inputChoice {
+  cnum: Float!
+  content: String!
+  questionId: String!
+}
+
+input updateChoice {
+  id: String!
+  cnum: Float!
+  content: String!
+  questionId: String!
+}
+
+input inputAnswer {
+  surveyId: String!
+  questionId: String!
+  choiceId: String!
+}
+
+input updateAnswer {
+  id: String!
+  surveyId: String!
+  questionId: String!
+  choiceId: String!
+}
