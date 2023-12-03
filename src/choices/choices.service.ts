@@ -15,6 +15,7 @@ export class ChoicesService {
     let choice = new ChoiceEntity();
     choice.cnum = data.cnum;
     choice.content = data.content;
+    choice.score = data.score;
     choice.questionId = data.questionId;
 
     await this.ChoiceRepository.save(choice);

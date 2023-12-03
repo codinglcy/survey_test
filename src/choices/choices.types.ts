@@ -6,6 +6,7 @@ class ChoiceDto {
   @Field() readonly id?: string;
   @Field() readonly cnum: number;
   @Field() readonly content: string;
+  @Field() readonly score: number;
   @Field() readonly questionId: string;
   // @Field(() => [AnswerEntity], { nullable: true })
   // readonly answers: AnswerEntity[];
@@ -15,6 +16,7 @@ class ChoiceDto {
 class inputChoice {
   @Field() readonly cnum: number;
   @Field() readonly content: string;
+  @Field() readonly score: number;
   @Field() readonly questionId: string;
 }
 
@@ -23,6 +25,7 @@ class updateChoice {
   @Field() readonly id?: string;
   @Field() readonly cnum: number;
   @Field() readonly content: string;
+  @Field() readonly score: number;
   @Field() readonly questionId: string;
 }
 

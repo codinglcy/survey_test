@@ -20,6 +20,9 @@ export class ChoiceEntity {
   @Column('varchar', { length: 100 })
   content: string;
 
+  @Column('int')
+  score: number;
+
   @ManyToOne(() => QuestionEntity, (question) => question.choices, {
     onDelete: 'CASCADE',
     onUpdate: 'CASCADE',
