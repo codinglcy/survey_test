@@ -3,7 +3,7 @@ import { SurveyEntity } from './surveys.entity';
 import { SurveysService } from './surveys.service';
 import {
   SurveyDto,
-  deleteResult,
+  deleteSurveyResult,
   inputSurvey,
   updateSurvey,
 } from './surveys.types';
@@ -32,7 +32,7 @@ export class SurveysResolver {
     return this.surveyService.updateSurveyById(data);
   }
 
-  @Mutation(() => deleteResult)
+  @Mutation(() => deleteSurveyResult)
   async deleteSurvey(@Args('id') id: string) {
     return this.surveyService.deleteSurveyById(id);
   }
