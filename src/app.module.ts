@@ -26,7 +26,7 @@ import { AnswersModule } from './answers/answers.module';
       inject: [ConfigService],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      autoSchemaFile: 'schema.gpl',
+      autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
     }),
     SurveysModule,
