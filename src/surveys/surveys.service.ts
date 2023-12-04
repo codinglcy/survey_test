@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SurveyEntity } from './surveys.entity';
 import { Repository } from 'typeorm';
 import { deleteSurveyResult, inputSurvey, updateSurvey } from './surveys.types';
+import { ErrorDto } from 'src/error.dto';
 
 @Injectable()
 export class SurveysService {
@@ -11,38 +12,73 @@ export class SurveysService {
     private readonly SurveyRepository: Repository<SurveyEntity>,
   ) {}
 
-  async createSurvey(data: inputSurvey): Promise<SurveyEntity> {
+  async createSurvey(data: inputSurvey): Promise<ErrorDto | SurveyEntity> {
     let survey = new SurveyEntity();
     survey.title = data.title;
     survey.notification = data.notification;
     survey.finish = data.finish;
 
-    await this.SurveyRepository.save(survey);
-
-    return survey;
+    return await this.SurveyRepository.save(survey)
+      .then(() => {
+        return survey;
+      })
+      .catch((err) => {
+        console.log(err);
+        return { message: err, code: 'SAVE_ERROR' };
+      });
   }
 
-  async getSurveys(): Promise<SurveyEntity[]> {
+  async getSurveys(): Promise<ErrorDto | SurveyEntity[]> {
     return await this.SurveyRepository.find({
       relations: ['questions'],
-    });
+    })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return { message: err, code: 'FIND_ERROR' };
+      });
   }
 
-  async getSurveyById(id: string): Promise<SurveyEntity> {
+  async getSurveyById(id: string): Promise<ErrorDto | SurveyEntity> {
     return await this.SurveyRepository.findOne({
       relations: { questions: true },
       where: { id: id },
-    });
+    })
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return { message: err, code: 'FIND_ERROR' };
+      });
   }
 
-  async updateSurveyById(data: updateSurvey): Promise<SurveyEntity> {
-    let result = await this.SurveyRepository.update(data.id, data);
+  async updateSurveyById(data: updateSurvey): Promise<ErrorDto | SurveyEntity> {
+    let result = await this.SurveyRepository.update(data.id, data)
+      .then((res) => {
+        return res;
+      })
+      .catch((err) => {
+        console.log(err);
+        return { affected: 0 };
+      });
 
     if (result.affected === 1) {
       return this.SurveyRepository.findOne({
         where: { id: data.id },
         relations: { questions: true },
-      });
+      })
+        .then((res) => {
+          return res;
+        })
+        .catch((err) => {
+          console.log(err);
+          return { message: err, code: 'FIND_ERROR' };
+        });
+    } else {
+      return { message: 'nothing to update', code: 'UPDATE_ERROR' };
     }
   }
 
