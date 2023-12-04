@@ -7,6 +7,7 @@ import { SurveysModule } from './surveys/surveys.module';
 import { QuestionsModule } from './questions/questions.module';
 import { ChoicesModule } from './choices/choices.module';
 import { AnswersModule } from './answers/answers.module';
+import { ErrorDto } from './error.dto';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { AnswersModule } from './answers/answers.module';
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
         host: configService.get('DB_HOST'),
-        port: +configService.get<number>('DB_PORT'),
+        port: +configService.get('DB_PORT'),
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_DATABASE'),
@@ -28,6 +29,16 @@ import { AnswersModule } from './answers/answers.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
+      formatError: (error): ErrorDto => {
+        const originalError = error.extensions?.originalError;
+
+        if (!originalError) {
+          return {
+            message: error.message,
+            code: error.extensions?.code,
+          };
+        }
+      },
     }),
     SurveysModule,
     QuestionsModule,
