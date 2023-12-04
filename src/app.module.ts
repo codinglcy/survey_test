@@ -28,6 +28,16 @@ import { AnswersModule } from './answers/answers.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       autoSchemaFile: 'schema.gql',
       driver: ApolloDriver,
+      formatError: (error) => {
+        const originalError = error.extensions?.originalError;
+
+        if (!originalError) {
+          return {
+            message: error.message,
+            code: error.extensions?.code,
+          };
+        }
+      },
     }),
     SurveysModule,
     QuestionsModule,
