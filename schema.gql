@@ -42,6 +42,7 @@ type AnswerDto {
   surveyId: String!
   questionId: String!
   choiceId: String!
+  user: String!
 }
 
 type deleteAnswerResult {
@@ -57,6 +58,9 @@ type Query {
   getChoiceById(id: String!): ChoiceDto!
   getAllAnswer: [AnswerDto!]!
   getAnswerById(id: String!): AnswerDto!
+  getSurveyAnswersByUser(surveyId: String!, user: String!): [AnswerDto!]!
+  getSurveyScore(surveyId: String!): Float!
+  getSurveyScoreByUser(surveyId: String!, user: String!): Float!
 }
 
 type Mutation {
@@ -121,6 +125,7 @@ input inputAnswer {
   surveyId: String!
   questionId: String!
   choiceId: String!
+  user: String!
 }
 
 input updateAnswer {
@@ -128,4 +133,5 @@ input updateAnswer {
   surveyId: String!
   questionId: String!
   choiceId: String!
+  user: String!
 }
