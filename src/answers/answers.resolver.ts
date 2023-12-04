@@ -22,6 +22,27 @@ export class AnswersResolver {
     return this.answerService.getAnswerById(id);
   }
 
+  @Query(() => [AnswerDto])
+  async getSurveyAnswersByUser(
+    @Args('surveyId') surveyId: string,
+    @Args('user') user: string,
+  ) {
+    return this.answerService.getSurveyAnswersByUser(surveyId, user);
+  }
+
+  @Query(() => Number)
+  async getSurveyScore(@Args('surveyId') surveyId: string) {
+    return this.answerService.getSurveyScore(surveyId);
+  }
+
+  @Query(() => Number)
+  async getSurveyScoreByUser(
+    @Args('surveyId') surveyId: string,
+    @Args('user') user: string,
+  ) {
+    return this.answerService.getSurveyScoreByUser(surveyId, user);
+  }
+
   @Mutation(() => AnswerDto)
   async createAnswer(@Args('data') data: inputAnswer) {
     return this.answerService.createAnswer(data);

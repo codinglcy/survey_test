@@ -6,6 +6,7 @@ class AnswerDto {
   @Field() readonly surveyId: string;
   @Field() readonly questionId: string;
   @Field() readonly choiceId: string;
+  @Field() readonly user: string;
 }
 
 @InputType()
@@ -13,6 +14,7 @@ class inputAnswer {
   @Field() readonly surveyId: string;
   @Field() readonly questionId: string;
   @Field() readonly choiceId: string;
+  @Field() readonly user: string;
 }
 
 @InputType()
@@ -21,6 +23,7 @@ class updateAnswer {
   @Field() readonly surveyId: string;
   @Field() readonly questionId: string;
   @Field() readonly choiceId: string;
+  @Field() readonly user: string;
 }
 
 @ObjectType()

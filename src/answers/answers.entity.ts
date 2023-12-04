@@ -40,4 +40,7 @@ export class AnswerEntity {
 
   @Column('uuid')
   choiceId: string;
+
+  @Column('varchar', { length: 50 })
+  user: string;
 }
